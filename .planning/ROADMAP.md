@@ -58,7 +58,8 @@
 
 **Plans:**
 
-- [ ] 02-01-PLAN.md — Notifications plugin with event subscriptions
+- [x] 02-01-PLAN.md — Notifications plugin with event subscriptions
+- [ ] 02-02-PLAN.md — Wire waiting sound to input_received event (gap closure)
 
 ---
 
@@ -240,21 +241,21 @@
 
 ## Progress
 
-| Phase                     | Plans Complete | Status                                                                    | Completed |
-| ------------------------- | -------------- | ------------------------------------------------------------------------- | --------- |
-| 1. Core Infrastructure    | 0/4            | Planned                                                                   | -         |
-| 2. Notifications          | 1/1            | [02-01-PLAN.md](.planning/phases/02-notifications-feedback/02-01-PLAN.md) | -         |
-| 3. Telegram & Alfred      | 0/1            | Not started                                                               | -         |
-| 4. AI Polish & Digest     | 0/1            | Not started                                                               | -         |
-| 5. Note Router            | 0/1            | Not started                                                               | -         |
-| 6. Memory & Search        | 0/1            | Not started                                                               | -         |
-| 7. Wake Word & Reflection | 0/1            | Not started                                                               | -         |
-| 8. Menubar                | 0/1            | Not started                                                               | -         |
-| 9. Action Items           | 0/1            | Not started                                                               | -         |
-| 10. Deductions            | 0/1            | Not started                                                               | -         |
-| 11. Link Resolution       | 0/1            | Not started                                                               | -         |
-| 12. Plugin Manager        | 0/1            | Not started                                                               | -         |
-| 13. Distribution          | 0/1            | Not started                                                               | -         |
+| Phase                     | Plans Complete | Status                             | Completed |
+| ------------------------- | -------------- | ---------------------------------- | --------- |
+| 1. Core Infrastructure    | 0/4            | Planned                            | -         |
+| 2. Notifications          | 1/2            | Gap closure pending: 02-02-PLAN.md | -         |
+| 3. Telegram & Alfred      | 0/1            | Not started                        | -         |
+| 4. AI Polish & Digest     | 0/1            | Not started                        | -         |
+| 5. Note Router            | 0/1            | Not started                        | -         |
+| 6. Memory & Search        | 0/1            | Not started                        | -         |
+| 7. Wake Word & Reflection | 0/1            | Not started                        | -         |
+| 8. Menubar                | 0/1            | Not started                        | -         |
+| 9. Action Items           | 0/1            | Not started                        | -         |
+| 10. Deductions            | 0/1            | Not started                        | -         |
+| 11. Link Resolution       | 0/1            | Not started                        | -         |
+| 12. Plugin Manager        | 0/1            | Not started                        | -         |
+| 13. Distribution          | 0/1            | Not started                        | -         |
 
 ---
 

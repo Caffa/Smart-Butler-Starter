@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/butler/__init__.py
+src/butler/cli/__init__.py
+src/core/event_bus.py
+src/smart_butler.egg-info/PKG-INFO
+src/smart_butler.egg-info/SOURCES.txt
+src/smart_butler.egg-info/dependency_links.txt
+src/smart_butler.egg-info/entry_points.txt
+src/smart_butler.egg-info/requires.txt
+src/smart_butler.egg-info/top_level.txt

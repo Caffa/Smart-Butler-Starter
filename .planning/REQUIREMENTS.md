@@ -115,9 +115,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Dev - Install & Doctor (Phase 1-13)
 
-- [ ] **INSTALL-01**: install.sh script creates ~/.butler/ structure with friendly personality
-- [ ] **INSTALL-02**: butler doctor checks dependencies and downloads models on first run
-- [ ] **INSTALL-03**: Git tags mark rollback checkpoints at each stage
+- [x] **INSTALL-01**: install.sh script creates ~/.butler/ structure with friendly personality
+- [x] **INSTALL-02**: butler doctor checks dependencies and downloads models on first run
+- [x] **INSTALL-03**: Git tags mark rollback checkpoints at each stage
 
 ## v2 Requirements
 
@@ -237,9 +237,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | READWISE-01 (v2) | Phase 11 | Pending |
 | PLUGMAN-01 (v2) | Phase 12 | Pending |
 | TCONF-01 (v2) | Phase 12 | Pending |
-| INSTALL-01 | Phase 1 | Pending |
-| INSTALL-02 | Phase 1 | Pending |
-| INSTALL-03 | Phase 1 | Pending |
+| INSTALL-01 | Phase 1 | Complete |
+| INSTALL-02 | Phase 1 | Complete |
+| INSTALL-03 | Phase 1 | Complete |
 
 **Coverage:**
 - v1 requirements: 53 total

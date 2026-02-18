@@ -1,0 +1,22 @@
+blinker>=1.9.0
+huey>=2.6.0
+pyyaml>=6.0
+psutil>=5.9.0
+ollama>=0.6.1
+chromadb>=1.5.0
+click>=8.0.0
+
+[all]
+smart-butler[dev,transcription]
+
+[dev]
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+black>=24.0.0
+mypy>=1.8.0
+ruff>=0.3.0
+
+[transcription]
+
+[transcription:sys_platform == "darwin"]
+parakeet-mlx>=0.1.0

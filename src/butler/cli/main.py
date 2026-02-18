@@ -27,8 +27,51 @@ def doctor(fix: bool):
 @cli.command()
 def process_voice():
     """Trigger voice processing (called by launchd)."""
-    click.echo("Processing voice input...")
-    click.echo("Status: Not yet implemented.")
+    import logging
+    import os
+    from pathlib import Path
+
+    from src.core.plugin_manager import PluginManager
+    from src.core.router import SimpleRouter
+    from src.core.logging_config import setup_logging
+    from src.core.config import get_config
+
+    # Initialize logging using config
+    config = get_config()
+    logs_dir = os.path.expanduser(config.get("paths.logs_dir", "~/.butler/logs"))
+    setup_logging(logs_dir)
+    logger = logging.getLogger(__name__)
+
+    # Initialize router to bridge events
+    router = SimpleRouter()
+    router.start()
+
+    # Load plugins
+    plugin_dir = Path(__file__).parent.parent.parent / "plugins"
+    manager = PluginManager(plugin_dir)
+    manager.load_plugins()
+
+    # Get voice_input plugin
+    voice_input = manager.get_plugin("voice_input")
+    if not voice_input:
+        click.echo("Error: voice_input plugin not found", err=True)
+        raise SystemExit(1)
+
+    # Scan and process
+    files = voice_input.scan_folder()
+    processed = 0
+    errors = 0
+
+    for file_path in files:
+        if voice_input.process_file(file_path):
+            processed += 1
+        else:
+            errors += 1
+
+    click.echo(f"Processed {processed} file(s), {errors} error(s)")
+
+    # Clean up router
+    router.stop()
 
 
 @cli.command()

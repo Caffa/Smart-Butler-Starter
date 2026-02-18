@@ -13,7 +13,7 @@
 ### One-Line Installation
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/yourusername/smart-butler/main/scripts/install.sh | bash
+curl -sSL https://github.com/Caffa/Smart-Butler-Starter/blob/6d4a7ceb5173eef68a603ecd52dab7c4f8235b56/scripts/install.sh | bash
 ```
 
 ### Verify Installation
@@ -26,7 +26,7 @@ butler doctor
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/smart-butler.git
+git clone git@github.com:Caffa/Smart-Butler-Starter.git
 cd smart-butler
 
 # Install with pip
@@ -111,3 +111,4 @@ MIT License - see [LICENSE](LICENSE) file.
 - [Ollama](https://ollama.com/) for local LLM inference
 - [parakeet-mlx](https://github.com/huggingface/parakeet-mlx) for Apple Silicon transcription
 - [ChromaDB](https://www.trychroma.com/) for vector storage
+

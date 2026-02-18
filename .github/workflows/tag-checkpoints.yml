@@ -1,0 +1,71 @@
+name: Tag Phase Checkpoints
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - 'phase-*'
+
+jobs:
+  tag-checkpoint:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Get commit message
+        id: commit
+        run: |
+          echo "message=$(git log -1 --pretty=%B | head -1)" >> $GITHUB_OUTPUT
+      
+      - name: Auto-tag phase checkpoints
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        run: |
+          # Extract phase and plan from recent commits
+          COMMIT_MSG="${{ steps.commit.outputs.message }}"
+          
+          # Check if this is a plan completion commit
+          if [[ "$COMMIT_MSG" =~ ^docs\(([0-9]+)-([0-9]+)\):\ complete ]]; then
+            PHASE="${BASH_REMATCH[1]}"
+            PLAN="${BASH_REMATCH[2]}"
+            TAG="phase-${PHASE}-plan-${PLAN}"
+            
+            # Check if tag already exists
+            if git rev-parse "$TAG" >/dev/null 2>&1; then
+              echo "Tag $TAG already exists, skipping"
+            else
+              git config user.name "GitHub Actions"
+              git config user.email "actions@github.com"
+              git tag -a "$TAG" -m "Phase ${PHASE}, Plan ${PLAN} complete"
+              git push origin "$TAG"
+              echo "Created tag: $TAG"
+            fi
+          fi
+      
+      - name: Create phase-complete tag
+        if: contains(github.event.head_commit.message, 'Phase complete')
+        run: |
+          # Look for phase completion in commit message
+          COMMIT_MSG="${{ steps.commit.outputs.message }}"
+          
+          if [[ "$COMMIT_MSG" =~ Phase\ ([0-9]+)\ complete ]]; then
+            PHASE="${BASH_REMATCH[1]}"
+            TAG="phase-${PHASE}-complete"
+            
+            if git rev-parse "$TAG" >/dev/null 2>&1; then
+              echo "Tag $TAG already exists, skipping"
+            else
+              git config user.name "GitHub Actions"
+              git config user.email "actions@github.com"
+              git tag -a "$TAG" -m "Phase ${PHASE}: MVP complete"
+              git push origin "$TAG"
+              echo "Created tag: $TAG"
+            fi
+          fi

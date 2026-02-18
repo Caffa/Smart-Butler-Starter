@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.butler.voicewatch</string>
+    
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/butler</string>
+        <string>process-voice</string>
+    </array>
+    
+    <key>WatchPaths</key>
+    <array>
+        <string>/Users/USER/Music/Voice Memos</string>
+    </array>
+    
+    <key>RunAtLoad</key>
+    <false/>
+    
+    <key>StandardOutPath</key>
+    <string>/Users/USER/.butler/logs/voicewatch.log</string>
+    
+    <key>StandardErrorPath</key>
+    <string>/Users/USER/.butler/logs/voicewatch.error.log</string>
+    
+    <key>ProcessType</key>
+    <string>Background</string>
+    
+    <key>ThrottleInterval</key>
+    <integer>10</integer>
+</dict>
+</plist>

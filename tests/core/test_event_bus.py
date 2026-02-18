@@ -41,13 +41,21 @@ class TestSignalBasics:
         received = {}
 
         @on(input_received)
-        def handler(text, source, timestamp, **kwargs):
+        def handler(sender, text, source, timestamp, **kwargs):
+            received["sender"] = sender
             received["text"] = text
             received["source"] = source
             received["timestamp"] = timestamp
 
-        emit(input_received, text="Hello world", source="voice", timestamp="2024-01-15T10:30:00Z")
+        emit(
+            input_received,
+            sender="voice_module",
+            text="Hello world",
+            source="voice",
+            timestamp="2024-01-15T10:30:00Z",
+        )
 
+        assert received["sender"] == "voice_module"
         assert received["text"] == "Hello world"
         assert received["source"] == "voice"
         assert received["timestamp"] == "2024-01-15T10:30:00Z"
@@ -57,18 +65,21 @@ class TestSignalBasics:
         received = {}
 
         @on(note_routed)
-        def handler(text, destination, metadata, **kwargs):
+        def handler(sender, text, destination, metadata, **kwargs):
+            received["sender"] = sender
             received["text"] = text
             received["destination"] = destination
             received["metadata"] = metadata
 
         emit(
             note_routed,
+            sender="classifier",
             text="Meeting notes",
             destination="daily_note",
             metadata={"confidence": 0.95, "tags": ["meeting"]},
         )
 
+        assert received["sender"] == "classifier"
         assert received["text"] == "Meeting notes"
         assert received["destination"] == "daily_note"
         assert received["metadata"]["confidence"] == 0.95
@@ -78,7 +89,8 @@ class TestSignalBasics:
         received = {}
 
         @on(note_written)
-        def handler(path, timestamp, word_count, source, **kwargs):
+        def handler(sender, path, timestamp, word_count, source, **kwargs):
+            received["sender"] = sender
             received["path"] = path
             received["timestamp"] = timestamp
             received["word_count"] = word_count
@@ -86,12 +98,14 @@ class TestSignalBasics:
 
         emit(
             note_written,
+            sender="writer",
             path="/vault/daily/2024-01-15.md",
             timestamp="2024-01-15T10:30:00Z",
             word_count=42,
             source="voice",
         )
 
+        assert received["sender"] == "writer"
         assert received["path"] == "/vault/daily/2024-01-15.md"
         assert received["word_count"] == 42
 
@@ -100,24 +114,27 @@ class TestSignalBasics:
         received = []
 
         @on(heartbeat_tick)
-        def handler(timestamp, **kwargs):
-            received.append(timestamp)
+        def handler(sender, timestamp, **kwargs):
+            received.append((sender, timestamp))
 
-        emit(heartbeat_tick, timestamp="2024-01-15T10:30:00Z")
-        emit(heartbeat_tick, timestamp="2024-01-15T10:31:00Z")
+        emit(heartbeat_tick, sender="scheduler", timestamp="2024-01-15T10:30:00Z")
+        emit(heartbeat_tick, sender="scheduler", timestamp="2024-01-15T10:31:00Z")
 
         assert len(received) == 2
+        assert received[0] == ("scheduler", "2024-01-15T10:30:00Z")
 
     def test_day_ended_signal(self) -> None:
         """Test day_ended end-of-day signal."""
         received = {}
 
         @on(day_ended)
-        def handler(date, **kwargs):
+        def handler(sender, date, **kwargs):
+            received["sender"] = sender
             received["date"] = date
 
-        emit(day_ended, date="2024-01-15")
+        emit(day_ended, sender="scheduler", date="2024-01-15")
 
+        assert received["sender"] == "scheduler"
         assert received["date"] == "2024-01-15"
 
     def test_pipeline_error_signal(self) -> None:
@@ -125,16 +142,19 @@ class TestSignalBasics:
         received = {}
 
         @on(pipeline_error)
-        def handler(error, context, **kwargs):
+        def handler(sender, error, context, **kwargs):
+            received["sender"] = sender
             received["error"] = error
             received["context"] = context
 
         emit(
             pipeline_error,
+            sender="transcription",
             error=ValueError("Invalid input"),
             context={"task": "transcription", "stage": "parse", "input_id": "123"},
         )
 
+        assert received["sender"] == "transcription"
         assert isinstance(received["error"], ValueError)
         assert received["context"]["task"] == "transcription"
 
@@ -159,8 +179,8 @@ class TestSenderIdentification:
         received_senders = []
 
         @on(input_received)
-        def handler(**kwargs):
-            received_senders.append(kwargs.get("sender"))
+        def handler(sender, **kwargs):
+            received_senders.append(sender)
 
         emit(input_received, sender="voice_capture", text="Hello")
         emit(input_received, sender="telegram_bot", text="World")
@@ -174,11 +194,11 @@ class TestSenderIdentification:
         all_messages = []
 
         @on(input_received, sender="voice_capture")
-        def voice_handler(text, **kwargs):
+        def voice_handler(sender, text, **kwargs):
             voice_messages.append(text)
 
         @on(input_received)
-        def all_handler(text, **kwargs):
+        def all_handler(sender, text, **kwargs):
             all_messages.append(text)
 
         emit(input_received, sender="voice_capture", text="Voice message")
@@ -208,18 +228,18 @@ class TestMultipleSubscribers:
         results = []
 
         @on(input_received)
-        def handler1(text, **kwargs):
+        def handler1(sender, text, **kwargs):
             results.append(f"handler1: {text}")
 
         @on(input_received)
-        def handler2(text, **kwargs):
+        def handler2(sender, text, **kwargs):
             results.append(f"handler2: {text}")
 
         @on(input_received)
-        def handler3(text, **kwargs):
+        def handler3(sender, text, **kwargs):
             results.append(f"handler3: {text}")
 
-        emit(input_received, text="Test message")
+        emit(input_received, sender="test", text="Test message")
 
         assert len(results) == 3
         assert "handler1: Test message" in results
@@ -230,11 +250,11 @@ class TestMultipleSubscribers:
         """Test get_signal_receivers returns correct count."""
 
         @on(input_received)
-        def handler1(**kwargs):
+        def handler1(sender, **kwargs):
             pass
 
         @on(input_received)
-        def handler2(**kwargs):
+        def handler2(sender, **kwargs):
             pass
 
         receivers = get_signal_receivers(input_received)
@@ -260,7 +280,7 @@ class TestDecoratorFeatures:
         """Test that @on preserves function name and docstring."""
 
         @on(input_received)
-        def my_handler(text, **kwargs):
+        def my_handler(sender, **kwargs):
             """My handler docstring."""
             pass
 
@@ -271,16 +291,16 @@ class TestDecoratorFeatures:
         """Test SignalSubscription context manager."""
         received = []
 
-        def handler(text, **kwargs):
+        def handler(sender, text, **kwargs):
             received.append(text)
 
         # Subscription is active within context
         with SignalSubscription(input_received, handler):
-            emit(input_received, text="Inside context")
+            emit(input_received, sender="test", text="Inside context")
             assert len(received) == 1
 
         # Subscription removed after context
-        emit(input_received, text="Outside context")
+        emit(input_received, sender="test", text="Outside context")
         assert len(received) == 1  # Should still be 1
 
 
@@ -305,7 +325,7 @@ class TestThreadSafety:
         lock = threading.Lock()
 
         @on(input_received)
-        def handler(text, **kwargs):
+        def handler(sender, text, **kwargs):
             with lock:
                 received.append(text)
             time.sleep(0.01)  # Small delay to increase concurrency
@@ -313,7 +333,7 @@ class TestThreadSafety:
         # Emit from multiple threads
         with ThreadPoolExecutor(max_workers=10) as executor:
             for i in range(100):
-                executor.submit(emit, input_received, text=f"message_{i}")
+                executor.submit(emit, input_received, sender="test", text=f"message_{i}")
 
         assert len(received) == 100
 
@@ -325,7 +345,7 @@ class TestThreadSafety:
             try:
 
                 @on(input_received)
-                def handler(**kwargs):
+                def handler(sender, **kwargs):
                     pass
 
                 time.sleep(0.001)
@@ -344,15 +364,27 @@ class TestThreadSafety:
 class TestDisconnectAll:
     """Test disconnect_all functionality."""
 
+    def setup_method(self) -> None:
+        """Clear all signal connections before each test."""
+        for signal in [
+            input_received,
+            note_routed,
+            note_written,
+            heartbeat_tick,
+            day_ended,
+            pipeline_error,
+        ]:
+            disconnect_all(signal)
+
     def test_disconnect_all_removes_receivers(self) -> None:
         """Test disconnect_all removes all receivers."""
 
         @on(input_received)
-        def handler1(**kwargs):
+        def handler1(sender, **kwargs):
             pass
 
         @on(input_received)
-        def handler2(**kwargs):
+        def handler2(sender, **kwargs):
             pass
 
         assert len(get_signal_receivers(input_received)) == 2

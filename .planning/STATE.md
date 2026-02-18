@@ -1,7 +1,7 @@
 # STATE: Smart Butler 2.0
 
-**Last updated:** 2026-02-18  
-**Session:** Quick task - exclude Voice Memos from file watching
+**Last updated:** 2026-02-19  
+**Session:** Phase 2 - Notifications & Feedback
 
 ---
 
@@ -9,7 +9,7 @@
 
 **Core Value:** Butler is invisible when idle and useful when needed — never the reason your computer is slow
 
-**Current Focus:** Phase 1 - Core Infrastructure
+**Current Focus:** Phase 2 - Notifications & Feedback
 
 **MVP Definition:** Voice memos from iPhone → transcribed → filed to Obsidian automatically
 
@@ -19,17 +19,17 @@
 
 | Attribute | Value                                                                             |
 | --------- | --------------------------------------------------------------------------------- |
-| Phase     | 1                                                                                 |
-| Plan      | 05 (complete)                                                                     |
-| Status    | CLI voice pipeline complete: router, process-voice command, event chain validated |
+| Phase     | 2                                                                                 |
+| Plan      | 01 (complete)                                                                     |
+| Status    | Notifications plugin complete: macOS notifications and audio feedback implemented |
 
 ### Phase Progress
 
 ```
-[░░░░░░░░░░░░░░░░░░] 0/13 phases
+[░░░░░░░░░░░░░░░░░░] 1/13 phases
 
 Phase 1:  ██████████ 100% (01-05 complete, 5/5 plans done)
-Phase 2:  ░░░░░░░░░░ 0%
+Phase 2:  ██████████ 100% (02-01 complete, 1/1 plans done)
 Phase 3:  ░░░░░░░░░░ 0%
 Phase 4:  ░░░░░░░░░░ 0%
 Phase 5:  ░░░░░░░░░░ 0%
@@ -56,6 +56,7 @@ Phase 13: ░░░░░░░░░░ 0%
 
 ---
 
+| Phase 02-notifications-feedback P01 | 9min | 3 tasks | 5 files |
 | Phase 01-core-infrastructure P05 | 6min | 3 tasks | 8 files |
 | Phase 01-core-infrastructure P03 | 19min | 5 tasks | 13 files |
 | Phase 01-core-infrastructure P02 | 23min | 5 tasks | 11 files |
@@ -78,6 +79,8 @@ Phase 13: ░░░░░░░░░░ 0%
 - [Phase 01-core-infrastructure]: Huey with SQLite backend for zero-config task persistence
 - [Phase 01-core-infrastructure]: ThrottledException pattern integrates with Huey retry mechanism
 - [Phase 01-core-infrastructure]: SimpleRouter for MVP - passthrough routing to daily notes (AI routing in Phase 5)
+- [Phase 02-notifications-feedback]: Use subprocess for terminal-notifier and afplay instead of Python packages for zero hard dependencies
+- [Phase 02-notifications-feedback]: Glass/Pop/Basso sounds for success/waiting/error states respectively
 
 ### Technical Patterns
 
@@ -111,13 +114,20 @@ None currently.
 
 ### Last Action
 
-Completed 01-05-PLAN.md - CLI process-voice command with SimpleRouter, complete event chain validated
+Completed 02-01-PLAN.md - Notifications plugin with macOS notifications and audio feedback
 
 ### Next Action
 
-Phase 1 complete - ready for Phase 2: AI Layer
+Phase 2 complete - ready for Phase 3: AI Layer
 
 ### Context to Preserve
+
+**Phase 2 Additions:**
+
+- Notifications plugin with zero hard dependencies
+- terminal-notifier for macOS native notifications
+- afplay for system sound feedback
+- Global mute config pattern established
 
 **Phase 1 Critical Path:**
 

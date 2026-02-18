@@ -34,9 +34,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### UX - Notifications (Phase 2)
 
-- [ ] **NOTIFY-01**: macOS notification displays on configurable events (note.written, pipeline.error)
-- [ ] **NOTIFY-02**: Audio feedback plays via afplay for success/waiting/failure states
-- [ ] **NOTIFY-03**: Plugin is fully removable with zero hard dependencies
+- [x] **NOTIFY-01**: macOS notification displays on configurable events (note.written, pipeline.error)
+- [x] **NOTIFY-02**: Audio feedback plays via afplay for success/waiting/failure states
+- [x] **NOTIFY-03**: Plugin is fully removable with zero hard dependencies
 
 ### Input - Telegram (Phase 3)
 
@@ -183,9 +183,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | OUTPUT-02 | Phase 1 | Pending |
 | OUTPUT-03 | Phase 1 | Pending |
 | OUTPUT-04 | Phase 1 | Pending |
-| NOTIFY-01 | Phase 2 | Pending |
-| NOTIFY-02 | Phase 2 | Pending |
-| NOTIFY-03 | Phase 2 | Pending |
+| NOTIFY-01 | Phase 2 | Complete |
+| NOTIFY-02 | Phase 2 | Complete |
+| NOTIFY-03 | Phase 2 | Complete |
 | TELEGRAM-01 | Phase 3 | Pending |
 | TELEGRAM-02 | Phase 3 | Pending |
 | TELEGRAM-03 | Phase 3 | Pending |

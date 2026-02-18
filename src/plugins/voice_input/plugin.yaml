@@ -1,0 +1,13 @@
+name: voice_input
+version: 1.0.0
+description: Watch folder for voice memos and transcribe using parakeet-mlx
+enabled: true
+capabilities_provided:
+  - audio_input
+events_emits:
+  - input.received
+config:
+  watch_path: ~/Music/Voice Memos
+  confidence_threshold: 0.5
+  move_processed: true
+  processed_folder: processed

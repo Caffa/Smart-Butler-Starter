@@ -132,6 +132,39 @@ class VoiceInputPlugin(BasePlugin):
         """Check if file is a supported audio file."""
         return path.suffix.lower() in self.SUPPORTED_EXTENSIONS
 
+    def _should_process_file(self, file_path: Path) -> bool:
+        """Check if a file should be processed.
+
+        Excludes:
+        - Hidden files (starting with '.')
+        - .DS_Store files (macOS metadata)
+        - Files without supported audio extensions
+
+        Args:
+            file_path: Path to file to check
+
+        Returns:
+            True if file should be processed, False otherwise
+        """
+        file_name = file_path.name
+
+        # Skip hidden files
+        if file_name.startswith("."):
+            logger.debug(f"Skipping hidden file: {file_name}")
+            return False
+
+        # Skip .DS_Store files
+        if file_name == ".DS_Store":
+            logger.debug(f"Skipping system file: {file_name}")
+            return False
+
+        # Check if it's a supported audio file
+        if not self._is_audio_file(file_path):
+            logger.debug(f"Skipping non-audio file: {file_name}")
+            return False
+
+        return True
+
     def _is_duplicate(self, file_path: Path) -> bool:
         """Check if file has already been processed."""
         try:
@@ -185,8 +218,7 @@ class VoiceInputPlugin(BasePlugin):
             logger.warning(f"File not found: {file_path}")
             return False
 
-        if not self._is_audio_file(file_path):
-            logger.debug(f"Not an audio file: {file_path}")
+        if not self._should_process_file(file_path):
             return False
 
         # Check for duplicates
@@ -238,7 +270,7 @@ class VoiceInputPlugin(BasePlugin):
 
         audio_files = []
         for file_path in self._watch_path.iterdir():
-            if file_path.is_file() and self._is_audio_file(file_path):
+            if file_path.is_file() and self._should_process_file(file_path):
                 if not self._is_duplicate(file_path):
                     audio_files.append(file_path)
 

@@ -1,0 +1,12 @@
+name: daily_writer
+version: 1.0.0
+description: Subscribe to note.routed events and append to daily notes in Obsidian format
+enabled: true
+events_listens:
+  - note.routed
+events_emits:
+  - note.written
+config:
+  vault_path: ~/Documents/Obsidian/Vault
+  daily_folder: Daily
+  timezone: America/New_York

@@ -14,12 +14,14 @@ def cli():
 
 
 @cli.command()
-def doctor():
+@click.option("--fix", is_flag=True, help="Auto-download missing models")
+def doctor(fix: bool):
     """Run health check and verify dependencies."""
-    click.echo("Butler Health Check")
-    click.echo("===================")
-    click.echo()
-    click.echo("Status: Not yet implemented. See Task 3.")
+    from butler.cli.doctor import check_dependencies
+
+    success = check_dependencies(fix=fix)
+    if not success:
+        raise click.ClickException("Health check found issues")
 
 
 @cli.command()

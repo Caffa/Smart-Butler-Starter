@@ -17,18 +17,18 @@
 
 ## Current Position
 
-| Attribute | Value                                                             |
-| --------- | ----------------------------------------------------------------- |
-| Phase     | 1                                                                 |
-| Plan      | 03 (complete)                                                     |
-| Status    | Voice input pipeline complete: voice input, daily writer, launchd |
+| Attribute | Value                                                                             |
+| --------- | --------------------------------------------------------------------------------- |
+| Phase     | 1                                                                                 |
+| Plan      | 05 (complete)                                                                     |
+| Status    | CLI voice pipeline complete: router, process-voice command, event chain validated |
 
 ### Phase Progress
 
 ```
 [░░░░░░░░░░░░░░░░░░] 0/13 phases
 
-Phase 1:  ██████████ 100% (01-03 complete, 4/4 plans done)
+Phase 1:  ██████████ 100% (01-05 complete, 5/5 plans done)
 Phase 2:  ░░░░░░░░░░ 0%
 Phase 3:  ░░░░░░░░░░ 0%
 Phase 4:  ░░░░░░░░░░ 0%
@@ -56,6 +56,7 @@ Phase 13: ░░░░░░░░░░ 0%
 
 ---
 
+| Phase 01-core-infrastructure P05 | 6min | 3 tasks | 8 files |
 | Phase 01-core-infrastructure P03 | 19min | 5 tasks | 13 files |
 | Phase 01-core-infrastructure P02 | 23min | 5 tasks | 11 files |
 | Phase 01-core-infrastructure P01 | 10min | 4 tasks | 9 files |
@@ -76,6 +77,7 @@ Phase 13: ░░░░░░░░░░ 0%
 - [Phase 01-core-infrastructure]: Git annotated tags for checkpoints - includes metadata and rollback commands
 - [Phase 01-core-infrastructure]: Huey with SQLite backend for zero-config task persistence
 - [Phase 01-core-infrastructure]: ThrottledException pattern integrates with Huey retry mechanism
+- [Phase 01-core-infrastructure]: SimpleRouter for MVP - passthrough routing to daily notes (AI routing in Phase 5)
 
 ### Technical Patterns
 
@@ -103,11 +105,11 @@ None currently.
 
 ### Last Action
 
-Completed 01-03-PLAN.md - Voice input pipeline with voice input, daily writer plugins
+Completed 01-05-PLAN.md - CLI process-voice command with SimpleRouter, complete event chain validated
 
 ### Next Action
 
-Phase 1 complete - ready for Phase 2: AI Layer or additional phases
+Phase 1 complete - ready for Phase 2: AI Layer
 
 ### Context to Preserve
 

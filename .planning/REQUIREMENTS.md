@@ -21,13 +21,13 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Input - Voice (Phase 1)
 
 - [ ] **VOICE-01**: Voice input plugin watches folder for audio files and transcribes them
-- [ ] **VOICE-02**: parakeet-mlx performs local transcription on Apple Silicon
-- [ ] **VOICE-03**: Transcribed text emits input.received event to pipeline
-- [ ] **VOICE-04**: launchd plist watches voice memo folder via WatchPaths
+- [x] **VOICE-02**: parakeet-mlx performs local transcription on Apple Silicon
+- [x] **VOICE-03**: Transcribed text emits input.received event to pipeline
+- [x] **VOICE-04**: launchd plist watches voice memo folder via WatchPaths
 
 ### Output - Daily Writer (Phase 1)
 
-- [ ] **OUTPUT-01**: Daily writer plugin subscribes to note.routed events
+- [x] **OUTPUT-01**: Daily writer plugin subscribes to note.routed events
 - [ ] **OUTPUT-02**: Notes append to YYYY-MM-DD.md with timestamps and Obsidian frontmatter
 - [ ] **OUTPUT-03**: Emits note.written event with path, timestamp, word count, and source
 - [ ] **OUTPUT-04**: All file writes use safe_write protocol
@@ -176,10 +176,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CORE-06 | Phase 1 | Pending |
 | CORE-07 | Phase 1 | Pending |
 | VOICE-01 | Phase 1 | Pending |
-| VOICE-02 | Phase 1 | Pending |
-| VOICE-03 | Phase 1 | Pending |
-| VOICE-04 | Phase 1 | Pending |
-| OUTPUT-01 | Phase 1 | Pending |
+| VOICE-02 | Phase 1 | Complete |
+| VOICE-03 | Phase 1 | Complete |
+| VOICE-04 | Phase 1 | Complete |
+| OUTPUT-01 | Phase 1 | Complete |
 | OUTPUT-02 | Phase 1 | Pending |
 | OUTPUT-03 | Phase 1 | Pending |
 | OUTPUT-04 | Phase 1 | Pending |

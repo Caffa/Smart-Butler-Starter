@@ -213,7 +213,7 @@
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Core Infrastructure | 0/1 | Not started | - |
+| 1. Core Infrastructure | 0/4 | Planned | - |
 | 2. Notifications | 0/1 | Not started | - |
 | 3. Telegram & Alfred | 0/1 | Not started | - |
 | 4. AI Polish & Digest | 0/1 | Not started | - |

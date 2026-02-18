@@ -1,3 +1,5 @@
 Reference Code/*
 .specstory/*
 .codenomad/*
+**/__pycache__/
+**/.venv/

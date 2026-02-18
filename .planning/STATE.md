@@ -1,7 +1,7 @@
 # STATE: Smart Butler 2.0
 
-**Last updated:** 2025-02-18  
-**Session:** Initial roadmap creation
+**Last updated:** 2026-02-18  
+**Session:** Quick task - exclude Voice Memos from file watching
 
 ---
 
@@ -98,6 +98,12 @@ Phase 13: ░░░░░░░░░░ 0%
 ### Blockers
 
 None currently.
+
+### Quick Tasks Completed
+
+| #   | Description                            | Date       | Commit  | Directory                                                                                     |
+| --- | -------------------------------------- | ---------- | ------- | --------------------------------------------------------------------------------------------- |
+| 1   | exclude Voice Memos from file watching | 2026-02-18 | b002734 | [1-exclude-voice-memos-from-file-watching](./quick/1-exclude-voice-memos-from-file-watching/) |
 
 ---
 

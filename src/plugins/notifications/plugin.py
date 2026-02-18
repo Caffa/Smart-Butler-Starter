@@ -21,13 +21,14 @@ from typing import Any, Optional
 from src.core.config import get_config
 from src.core.event_bus import (
     SignalSubscription,
+    input_received,
     note_written,
     pipeline_error,
 )
 from src.plugins.base import BasePlugin
 from src.plugins.manifest import PluginManifest
 
-from .audio import play_error_sound, play_success_sound
+from .audio import play_error_sound, play_success_sound, play_waiting_sound
 from .notifier import NotificationService
 
 logger = logging.getLogger(__name__)
@@ -165,6 +166,25 @@ class NotificationsPlugin(BasePlugin):
 
         logger.debug(f"Error notification sent for: {error}")
 
+    def _on_input_received(self, sender: Any, **kwargs: Any) -> None:
+        """Handle input.received event - play waiting sound.
+
+        Args:
+            sender: Event sender
+            **kwargs: Event data (text, source, timestamp)
+        """
+        if self._muted:
+            logger.debug("Notifications muted, skipping input notification")
+            return
+
+        source = kwargs.get("source", "unknown")
+
+        # Play waiting sound to indicate processing has started
+        if self._afplay_available:
+            play_waiting_sound(muted=self._muted)
+
+        logger.debug(f"Playing waiting sound for input from {source}")
+
     def on_enable(self) -> None:
         """Enable the plugin and subscribe to events."""
         # Load configuration
@@ -204,7 +224,15 @@ class NotificationsPlugin(BasePlugin):
         error_sub.connect()
         self._event_subscriptions.append(error_sub)
 
-        logger.debug("Connected to note_written and pipeline_error signals")
+        # Subscribe to input.received events
+        input_sub = SignalSubscription(
+            input_received,
+            self._on_input_received,
+        )
+        input_sub.connect()
+        self._event_subscriptions.append(input_sub)
+
+        logger.debug("Connected to note_written, pipeline_error, and input_received signals")
 
     def get_status(self) -> dict[str, Any]:
         """Get plugin status information.

@@ -5,6 +5,7 @@ enabled: true
 events_listens:
   - note.written
   - pipeline.error
+  - input.received
 events_emits: []
 config:
   muted: false

@@ -10,7 +10,7 @@
 ## Phases
 
 - [ ] **Phase 1: Core Infrastructure** - Event bus, plugin system, voice input, daily writer, installation
-- [ ] **Phase 2: Notifications & Feedback** - macOS notifications and audio feedback
+- [x] **Phase 2: Notifications & Feedback** - macOS notifications and audio feedback (completed 2026-02-18)
 - [ ] **Phase 3: Telegram & Alfred** - Multi-device input via Telegram bot and Alfred workflow
 - [ ] **Phase 4: AI Text Polish & Day Digest** - LLM text cleaning and nightly summaries
 - [ ] **Phase 5: Note Router** - AI-powered note classification and routing
@@ -58,7 +58,7 @@
 
 **Plans:**
 
-- [x] 02-01-PLAN.md — Notifications plugin with event subscriptions
+2/2 plans complete
 - [ ] 02-02-PLAN.md — Wire waiting sound to input_received event (gap closure)
 
 ---
@@ -244,7 +244,7 @@
 | Phase                     | Plans Complete | Status                             | Completed |
 | ------------------------- | -------------- | ---------------------------------- | --------- |
 | 1. Core Infrastructure    | 0/4            | Planned                            | -         |
-| 2. Notifications          | 1/2            | Gap closure pending: 02-02-PLAN.md | -         |
+| 2. Notifications          | 2/2 | Complete   | 2026-02-18 |
 | 3. Telegram & Alfred      | 0/1            | Not started                        | -         |
 | 4. AI Polish & Digest     | 0/1            | Not started                        | -         |
 | 5. Note Router            | 0/1            | Not started                        | -         |

@@ -238,18 +238,18 @@ class TestVoiceInputPlugin:
         assert status["confidence_threshold"] == 0.7
 
     def test_should_process_file_hidden(self, plugin):
-        ""Test that hidden files are excluded."""
+        """Test that hidden files are excluded."""
         assert plugin._should_process_file(Path(".hidden_file.m4a")) is False
         assert plugin._should_process_file(Path(".DS_Store")) is False
         assert plugin._should_process_file(Path(".random_hidden")) is False
 
     def test_should_process_file_ds_store(self, plugin):
-        ""Test that .DS_Store files are excluded."""
+        """Test that .DS_Store files are excluded."""
         assert plugin._should_process_file(Path(".DS_Store")) is False
         assert plugin._should_process_file(Path("subdir/.DS_Store")) is False
 
     def test_should_process_file_audio_extensions(self, plugin):
-        ""Test that supported audio files are accepted."""
+        """Test that supported audio files are accepted."""
         assert plugin._should_process_file(Path("test.m4a")) is True
         assert plugin._should_process_file(Path("test.mp3")) is True
         assert plugin._should_process_file(Path("test.wav")) is True
@@ -258,7 +258,7 @@ class TestVoiceInputPlugin:
         assert plugin._should_process_file(Path("test.pdf")) is False
 
     def test_scan_folder_excludes_system_files(self, plugin):
-        ""Test that scan_folder ignores hidden files."""
+        """Test that scan_folder ignores hidden files."""
         with tempfile.TemporaryDirectory() as tmpdir:
             plugin._watch_path = Path(tmpdir)
 
@@ -282,7 +282,7 @@ class TestVoiceInputPlugin:
             assert files[0].name == "test.m4a"
 
     def test_process_file_skips_system_files(self, plugin):
-        ""Test that process_file returns False for hidden files."""
+        """Test that process_file returns False for hidden files."""
         with tempfile.TemporaryDirectory() as tmpdir:
             # Create test files
             hidden_file = Path(tmpdir) / ".hidden.m4a"

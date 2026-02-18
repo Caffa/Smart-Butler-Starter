@@ -5,7 +5,8 @@
 
 ## v1 Requirements
 
-Requirements for initial release. Each maps to roadmap phases.
+Requirements for initial release. Each maps to roadmap phases.  
+**Note:** 8 additional requirements elevated from v2 to v1 (phases 9-12) per roadmap scope decision.
 
 ### Core Infrastructure (Phase 1)
 
@@ -223,18 +224,34 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ACTION-01 | Phase 9 | Pending |
 | ACTION-02 | Phase 9 | Pending |
 | ACTION-03 | Phase 9 | Pending |
+| CONV-01 (v2) | Phase 9 | Pending |
+| CONTR-01 (v2) | Phase 9 | Pending |
+| BRIEF-01 (v2) | Phase 9 | Pending |
+| DEDUCT-01 (v2) | Phase 10 | Pending |
+| DEDUCT-02 (v2) | Phase 10 | Pending |
+| SMART-01 (v2) | Phase 10 | Pending |
 | YOUTUBE-01 | Phase 11 | Pending |
 | YOUTUBE-02 | Phase 11 | Pending |
 | YOUTUBE-03 | Phase 11 | Pending |
 | YOUTUBE-04 | Phase 11 | Pending |
+| READWISE-01 (v2) | Phase 11 | Pending |
+| PLUGMAN-01 (v2) | Phase 12 | Pending |
+| TCONF-01 (v2) | Phase 12 | Pending |
 | INSTALL-01 | Phase 1 | Pending |
 | INSTALL-02 | Phase 1 | Pending |
 | INSTALL-03 | Phase 1 | Pending |
 
 **Coverage:**
 - v1 requirements: 53 total
-- Mapped to phases: 53
+- v2 elevated to v1: 8 requirements (phases 9-12)
+- Total mapped: 61
 - Unmapped: 0 ✓
+
+**Note:** 8 v2 requirements elevated to v1 scope per roadmap decision:
+- Phase 9: Guided conversation, contradiction detector, morning briefing
+- Phase 10: Deductions, smarter digest  
+- Phase 11: Readwise integration
+- Phase 12: Plugin manager TUI, transcription confidence
 
 ---
 *Requirements defined: 2025-02-18*

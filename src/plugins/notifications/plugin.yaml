@@ -1,0 +1,10 @@
+name: notifications
+version: 1.0.0
+description: macOS notifications and audio feedback for Butler activity
+enabled: true
+events_listens:
+  - note.written
+  - pipeline.error
+events_emits: []
+config:
+  muted: false

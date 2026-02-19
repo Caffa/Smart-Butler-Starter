@@ -3,10 +3,14 @@
   "depth": "standard",
   "parallelization": true,
   "commit_docs": true,
-  "model_profile": "balanced",
+  "model_profile": "opencode/big-pickle for planning and research, opencode/kimi-k2.5-free or opencode/glm-5-free when writing and for verification",
   "workflow": {
     "research": true,
     "plan_check": true,
-    "verifier": true
+    "verifier": true,
+    "auto_advance": true
+  },
+  "git": {
+    "branching_strategy": "phase"
   }
 }
